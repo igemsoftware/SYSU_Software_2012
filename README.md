@@ -15,6 +15,6 @@ BiArkit_windows_1_00.exe - including Setup of BiArkit.
 
 Tutorial - including the guides for using BiArkit.
 
-3. Compiling the code
+3 Compiling the code
 
 Announcement: You just need to click on the Setup to install BiArkit and if you want to refine the codes, you can open BiArkitProject.rar by Netbeans. 
