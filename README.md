@@ -18,3 +18,5 @@ Tutorial - including the guides for using BiArkit.
 3 Compiling the code
 
 Announcement: You just need to click on the Setup to install BiArkit and if you want to refine the codes, you can open BiArkitProject.rar by Netbeans. 
+
+More information about our BiArkit software system: http://2012.igem.org/Team:SYSU-Software
