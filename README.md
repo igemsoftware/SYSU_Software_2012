@@ -1,5 +1,7 @@
                       README
-Contant us:You can speak Chinese if you can...
+
+Contant us:
+           You can speak Chinese if you can...
            Any question about the software please contact :1036479561@qq.com;whenjonny@gmail.com
            Any question about our team:jiang2@mail2.sysu.edu.cn or shanjiang-2008@163.com
 
