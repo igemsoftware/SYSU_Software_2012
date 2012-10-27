@@ -11,29 +11,16 @@ import org.jdom.Element;
  * @author Guo Jiexin
  */
 public class Subpart {
-    public enum subpart_type{
-        DNA,PlasmidBackbones,Plasmids,Primers,Promoters,ProteinCodingSequences,
-        ProteinDomains,RibosomeBindingSites,Terminators,TranslationalUnits    
-        ,other,Reporters;
+
+    public enum subpart_type {
+
+        DNA, Plasmid_Backbone, Plasmid, Primers, Promoters, Coding,
+        Protein_Domain, RBS, other, Reporter, Composite, Conjugation, Generator, Intermediate, Regulatory, RNA, Signalling, T7, Tag, Terminator, Translational_Unit;
+
         @Override
         public String toString() {
-            String id=name();
-            if(id.equals("DNA"))
-                return "DNA";
-            else if(id.equals("RibosomeBindingSites"))
-                return "RBS";
-            else if(id.equals("ProteinCodingSequences"))
-                return "Coding";
-            else if(id.equals("PlasmidBackbones"))
-                return "Plasmid_Backbone";
-            else if(id.equals("Primers"))
-                return "Primer";
-            else if(id.equals("Terminators"))
-                return "Terminator";
-            else if(id.equals("Reporters"))
-                return "Reporter";
-            else
-                return "other";
+            String id = name();
+            return id;
         }
     }
     private subpart_type type;
@@ -80,30 +67,65 @@ public class Subpart {
         this.type = type;
     }
     private String part_name;
+    /**
+     * 
+     * @param ele a xml element from a xml
+     */
     public Subpart(Element ele) {
-        this.part_name=ele.getChildText("part_name");
-        this.type=getSubpartTypeFromString(ele.getChildText("part_type"));       
+        this.part_name = ele.getChildText("part_name");
+        this.type = getSubpartTypeFromString(ele.getChildText("part_type"));        
         this.PrintAll();
     }
-    private void PrintAll()
-    {
-        System.out.println(this.part_name+" "+this.type);
+
+    private void PrintAll() {
+        System.out.println(this.part_name + " " + this.type);
     }
-    public static subpart_type getSubpartTypeFromString(String type)
-    {
-        if(type.toUpperCase().equals("RBS"))
-            return subpart_type.RibosomeBindingSites;
-        else if(type.toLowerCase().equals("coding"))
-            return subpart_type.ProteinCodingSequences;
-        else if(type.toLowerCase().equals("plasmid_backbone"))
-            return subpart_type.PlasmidBackbones;
-        else if(type.toLowerCase().equals("primer"))
-            return subpart_type.Primers;
-        else if(type.toLowerCase().equals("terminator"))
-            return subpart_type.Terminators;
-        else if(type.toLowerCase().equals("reporter"))
-            return subpart_type.Reporters;
-        else
+    /**
+     * Get subpart_type from string
+     * @param type
+     * @return 
+     */
+    public static subpart_type getSubpartTypeFromString(String type) {
+        if (type.equals("Coding")) {
+            return subpart_type.Coding;
+        } else if (type.equals("Composite")) {
             return subpart_type.other;
+        } else if (type.equals("Conjugation")) {
+            return subpart_type.Conjugation;
+        } else if (type.equals("DNA")) {
+            return subpart_type.DNA;
+        } else if (type.equals("Generator")) {
+            return subpart_type.Generator;
+        } else if (type.equals("Intermediate")) {
+            return subpart_type.Intermediate;
+        } else if (type.equals("Plasmid")) {
+            return subpart_type.Plasmid;
+        } else if (type.equals("Plasmid_Backbone")) {
+            return subpart_type.Plasmid_Backbone;
+        } else if (type.equals("Primers")) {
+            return subpart_type.Primers;
+        } else if (type.equals("Protein_Domain")) {
+            return subpart_type.Protein_Domain;
+        } else if (type.equals("RBS")) {
+            return subpart_type.RBS;
+        } else if (type.equals("Regulatory")) {
+            return subpart_type.Regulatory;
+        } else if (type.equals("Reporter")) {
+            return subpart_type.Reporter;
+        } else if (type.equals("RNA")) {
+            return subpart_type.RNA;
+        } else if (type.equals("Signalling")) {
+            return subpart_type.Signalling;
+        } else if (type.equals("T7")) {
+            return subpart_type.T7;
+        } else if (type.equals("Tag")) {
+            return subpart_type.Tag;
+        } else if (type.equals("Terminator")) {
+            return subpart_type.Terminator;
+        } else if (type.equals("Translational_Unit")) {
+            return subpart_type.Translational_Unit;
+        } else {
+            return subpart_type.other;
+        }
     }
 }

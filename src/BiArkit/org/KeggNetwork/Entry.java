@@ -1,5 +1,9 @@
 package org.KeggNetwork;
 import org.dom4j.Element;
+/**
+ * The entry in a xml file of pathway
+ * @author Guo Jiexin
+ */
 public class Entry {
 	public String id = "not init";
 	public String name = "not init";

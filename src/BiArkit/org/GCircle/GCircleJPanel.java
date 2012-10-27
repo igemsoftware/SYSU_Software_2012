@@ -1,3 +1,5 @@
+package org.GCircle;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -7,7 +9,7 @@
  *
  * Created on 2012-8-21, 17:44:27
  */
-package org.GCircle;
+
 
 import java.awt.Color;
 import java.awt.Component;
@@ -82,7 +84,7 @@ public class GCircleJPanel extends javax.swing.JPanel {
     /**
      * The Signals' Color when drawing
      */
-    final private Color GENOME_SIGNAL_COLOR = Color.black;
+    final private Color GENOME_SIGNAL_COLOR =new Color(102,0,153);// Color.black;
     /**
      * To know if the user choose to show tooltip or information Form
      */
@@ -153,7 +155,7 @@ public class GCircleJPanel extends javax.swing.JPanel {
     /**
      * Reset the scale to 1.0
      */
-    private void resetScale() {
+    public void resetScale() {
         this.setToolTipText("");
         this.clearDrawed();
         this.setSize(this.scrollpane.getSize());
@@ -192,7 +194,7 @@ public class GCircleJPanel extends javax.swing.JPanel {
 
     @Override
     public void update(Graphics g) {
-        if (this.offScreenImage != null) {            
+        if (this.offScreenImage != null) {
         } else {
             offScreenImage = createImage(this.getWidth(), this.getHeight());
             this.mypaint(offScreenImage.getGraphics());
@@ -233,7 +235,8 @@ public class GCircleJPanel extends javax.swing.JPanel {
         @Override
         protected void done() {
             this.use.finish();
-            GCircleJPanel.this.repaint();
+            GCircleJPanel.this.clearDrawed();
+            //GCircleJPanel.this.repaint();
         }
 
         /**
@@ -484,6 +487,20 @@ public class GCircleJPanel extends javax.swing.JPanel {
 //        }
 //        return signals;
 //    }
+//    private JMenu createWindowMenu() {
+//        JMenu windowMenu = new JMenu("Window");
+//        final JMenuItem openXmlFastaMenuItem = new JMenuItem("Inside");
+//        openXmlFastaMenuItem.setFont(menuFont);
+//        openXmlFastaMenuItem.addActionListener(new ActionListener() {           
+//            @Override
+//            public void actionPerformed(ActionEvent e) {                
+//                GCircleJPanel.this.clearDrawed();
+//            }
+//        });        
+//        windowMenu.add(openXmlFastaMenuItem);
+//        return windowMenu;
+//    }
+
     /**
      * Create a file menu:
      * File->Open Signal File;
@@ -493,12 +510,13 @@ public class GCircleJPanel extends javax.swing.JPanel {
      */
     private JMenu createFileMenu() {
         JMenu fileMenu = new JMenu("File");
-        fileMenu.setBackground(Color.white);
+        fileMenu.setBackground(new Color(125, 226, 255));
         fileMenu.setFont(new java.awt.Font("Arial Black", 0, 14));
         fileMenu.setMnemonic(KeyEvent.VK_F);
         final JMenuItem openXmlFastaMenuItem = new JMenuItem("Open Xml File and Fasta File");
         openXmlFastaMenuItem.setFont(menuFont);
         openXmlFastaMenuItem.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent e) {
                 try {
                     jFileChooser.setCurrentDirectory(new File(HistoryFile.getPathFromHistoryFile("history.txt")));
@@ -520,14 +538,15 @@ public class GCircleJPanel extends javax.swing.JPanel {
                     }
                 });
                 jFileChooser.showOpenDialog(GCircleJPanel.this);
+                if (jFileChooser.getSelectedFile() == null) {
+                    return;
+                }
                 try {
                     HistoryFile.setPathToHistoryFile(jFileChooser.getSelectedFile().getPath(), "history.txt");
                 } catch (IOException ex) {
                     Logger.getLogger(GCircleJPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                if (jFileChooser.getSelectedFile() == null) {
-                    return;
-                }
+                
                 String xmlPath = jFileChooser.getSelectedFile().getAbsolutePath();
                 if (xmlFile == null) {
                     xmlFile = new GetGenomeFromXml(jFileChooser.getSelectedFile().getAbsolutePath());
@@ -566,14 +585,17 @@ public class GCircleJPanel extends javax.swing.JPanel {
                 }
                 GCircleJPanel.this.readGenomesFromXml(xmlPath, file.getFileSize() - file.getFirstLength());
                 System.out.println("Gene length total: " + (file.getFileSize() - file.getFirstLength()));
+                System.out.println(GCircleJPanel.this.genomesList.size() + " " + GCircleJPanel.this.genomeSignalList.size());
                 if (GCircleJPanel.this.genomesList.size() > GCircleJPanel.this.genomeSignalList.size() && GCircleJPanel.this.softFile != null) {
                     for (int i = GCircleJPanel.this.genomeSignalList.size(); i < GCircleJPanel.this.genomesList.size(); i++) {
                         new GCircleJPanel.LoadAListGenomeSignalBackground(GCircleJPanel.this.genomesList.get(i)).execute();
                     }
                 }
+
                 optionMenu.setEnabled(true);
                 GCircleJPanel.this.setScaleMenuItem.setEnabled(true);
-                // GCircleJPanel.this.repaint();               
+//                GCircleJPanel.this.repaint();         
+//                 GCircleJPanel.this.clearDrawed();
             }
         });
         JMenuItem openSignalAndSoftFileMenuItem = new JMenuItem("Open Signal and Soft File");
@@ -683,9 +705,9 @@ public class GCircleJPanel extends javax.swing.JPanel {
      *          Zoom Out
      * @return 
      */
-    private JMenu createOptionMenu() {        
+    private JMenu createOptionMenu() {
         optionMenu = new JMenu("Option");
-        optionMenu.setBackground(Color.white);
+        optionMenu.setBackground(new Color(125, 226, 255));
         optionMenu.setEnabled(false);
         optionMenu.setMnemonic(KeyEvent.VK_O);
         optionMenu.setFont(menuFont);
@@ -785,6 +807,7 @@ public class GCircleJPanel extends javax.swing.JPanel {
         menuBar.setBackground(Color.white);
         menuBar.add(this.createFileMenu());
         menuBar.add(this.createOptionMenu());
+//        menuBar.add(this.createWindowMenu());
         return menuBar;
     }
 
@@ -1029,6 +1052,7 @@ public class GCircleJPanel extends javax.swing.JPanel {
 
         public ImagePanel(GCircleJPanel GCirclePanel) {
             this.GCirclePanel = GCirclePanel;
+            this.setBackground(Color.white);
             this.addMouseListener(new MouseListener() {
 
                 public void mouseClicked(MouseEvent e) {
@@ -1079,14 +1103,13 @@ public class GCircleJPanel extends javax.swing.JPanel {
                     } catch (IOException ex) {
                         Logger.getLogger(GCircleJPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                        image = zoomOutImage(image, this.getWidth(), this.getHeight());
-                        g.drawImage(image, 0, 0, null);                    
+                    image = zoomOutImage(image, this.getWidth(), this.getHeight());
+                    g.drawImage(image, 0, 0, null);
                 } else {
                     g.drawImage(image, 0, 0, null);
                 }
-            }
-            
-            this.paintRectangle(g);
+                this.paintRectangle(g);
+            }          
         }
     }
 
@@ -1628,6 +1651,7 @@ public class GCircleJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         setBackground(java.awt.Color.white);
+        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 255), 2, true));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setDoubleBuffered(false);
         addMouseWheelListener(new java.awt.event.MouseWheelListener() {
@@ -1665,6 +1689,11 @@ public class GCircleJPanel extends javax.swing.JPanel {
                 formMouseMoved(evt);
             }
         });
+        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                formPropertyChange(evt);
+            }
+        });
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
                 formAncestorMoved(evt);
@@ -1679,11 +1708,11 @@ public class GCircleJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 396, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 296, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
@@ -1792,7 +1821,12 @@ public class GCircleJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_formAncestorMoved
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-    }//GEN-LAST:event_formComponentResized
+	}//GEN-LAST:event_formComponentResized
+
+    private void formPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_formPropertyChange
+
+    }//GEN-LAST:event_formPropertyChange
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

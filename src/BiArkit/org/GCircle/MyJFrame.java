@@ -29,6 +29,7 @@ public class MyJFrame extends javax.swing.JFrame {//javax.swing.JFrame {
     /** Creates new form MyJFrame */
     public MyJFrame() {
         initComponents();
+        this.getContentPane().setBackground(new Color(125, 226, 255));
         this.setTitle("GCircle");
         jpanel = new GCircleJPanel(this);
         jpanel.setBackground(Color.white);
@@ -72,18 +73,28 @@ public class MyJFrame extends javax.swing.JFrame {//javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(java.awt.Color.white);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowDeiconified(java.awt.event.WindowEvent evt) {
+                formWindowDeiconified(evt);
+            }
+        });
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
             }
         });
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+                formWindowStateChanged(evt);
+            }
+        });
 
         leftPanel.setBackground(java.awt.Color.white);
-        leftPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        leftPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 255), 2, true));
         leftPanel.setName("leftPanel"); // NOI18N
 
         thumbOnPanel.setBackground(java.awt.Color.white);
-        thumbOnPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        thumbOnPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 255), 2, true));
         thumbOnPanel.setName("thumbOnPanel"); // NOI18N
         thumbOnPanel.setPreferredSize(new java.awt.Dimension(159, 165));
 
@@ -112,9 +123,10 @@ public class MyJFrame extends javax.swing.JFrame {//javax.swing.JFrame {
             .addGroup(leftPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(thumbOnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(337, Short.MAX_VALUE))
+                .addContainerGap(350, Short.MAX_VALUE))
         );
 
+        rightPanel.setBackground(new Color(125, 226, 255));
         rightPanel.setName("rightPanel"); // NOI18N
         rightPanel.setPreferredSize(new java.awt.Dimension(525, 525));
         rightPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -131,7 +143,7 @@ public class MyJFrame extends javax.swing.JFrame {//javax.swing.JFrame {
         );
         rightPanelLayout.setVerticalGroup(
             rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 530, Short.MAX_VALUE)
+            .addGap(0, 543, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,10 +159,10 @@ public class MyJFrame extends javax.swing.JFrame {//javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(rightPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                    .addComponent(rightPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
                     .addComponent(leftPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -166,8 +178,17 @@ public class MyJFrame extends javax.swing.JFrame {//javax.swing.JFrame {
 	}//GEN-LAST:event_rightPanelComponentResized
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-        
+
     }//GEN-LAST:event_formComponentResized
+
+    private void formWindowDeiconified(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeiconified
+      
+    }//GEN-LAST:event_formWindowDeiconified
+
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formWindowStateChanged
 
     /**
      * @param args the command line arguments

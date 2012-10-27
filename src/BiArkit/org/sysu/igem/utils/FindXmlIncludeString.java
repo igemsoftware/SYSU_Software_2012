@@ -28,16 +28,19 @@ import org.igem.browser.Browser;
  */
 public class FindXmlIncludeString {
 
-    public FindXmlIncludeString(KGMLReader kgmlReader, JPanel jPanel13) {
-        this.kgmlReader = kgmlReader;
-        this.jPanel13 = jPanel13;
-    }
+//    public FindXmlIncludeString(KGMLReader kgmlReader) {
+////        this.kgmlReader = kgmlReader;
+////        this.jPanel13 = jPanel13;
+//    }
     public FindXmlIncludeString(Browser browser) {   
         this.browser=browser;
     }
+    public FindXmlIncludeString(JFrame frame) {   
+        this.browser=browser;
+    }
     Browser browser=null;
-    KGMLReader kgmlReader = null;
-    JPanel jPanel13 = null;
+//    KGMLReader kgmlReader = null;
+//    JPanel jPanel13 = null;
 
     private boolean isStringInFile(final String str, File file) throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -117,20 +120,23 @@ public class FindXmlIncludeString {
         final List<File> xmls = this.findAllXmlHasString(str, "xml\\kegg");
         final JList xmlJList = new JList();
         DefaultListModel model = new DefaultListModel();
-        if (xmls.size() == 0) {
+        if (xmls.isEmpty()) {
             model.addElement("no result!");
         } else {
             for (int i = 0; i < xmls.size(); i++) {
                 model.addElement(xmls.get(i).getName());
             }
-        }
-        
+        }        
         xmlJList.setModel(model);
         xmlJList.addListSelectionListener(new ListSelectionListener() {
-
             public void valueChanged(ListSelectionEvent e) {
                 if (!xmlJList.getSelectedValue().equals("no result!")) {
-                    FindXmlIncludeString.this.kgmlReader = new org.KeggNetwork.KGMLReader(xmls.get(xmlJList.getSelectedIndex()).getAbsolutePath(), jPanel13);
+//                    FindXmlIncludeString.this.browser.kgmlReader.ClearAll();
+//                    FindXmlIncludeString.this.browser.kgmlReader.ReadXML(xmls.get(xmlJList.getSelectedIndex()).getAbsolutePath());
+//                    FindXmlIncludeString.this.browser.kgmlReader=new org.KeggNetwork.KGMLReader(xmls.get(xmlJList.getSelectedIndex()).getAbsolutePath(), FindXmlIncludeString.this.browser.jPanel13);
+//                    FindXmlIncludeString.this.browser.kgmlReader = new org.KeggNetwork.KGMLReader(xmls.get(xmlJList.getSelectedIndex()).getAbsolutePath(), FindXmlIncludeString.this.browser.jPanel13);
+//                    FindXmlIncludeString.this.browser.kgmlReader.ClearAll();
+                    FindXmlIncludeString.this.browser.showANewKgml(xmls.get(xmlJList.getSelectedIndex()).getAbsolutePath());
                 }
                 frame.dispose();
             }

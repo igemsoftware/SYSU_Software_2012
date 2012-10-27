@@ -2,7 +2,10 @@ package org.sysu.igem.riboswitch;
 import org.sysu.igem.riboswitch.freeEnergy;
 import org.sysu.igem.riboswitch.sequence;
 
-
+/**
+ * 
+ * @author Miao Zong
+ */
 public class Riboswitch{
 	protected sequence aptamer;
 	protected sequence MS;

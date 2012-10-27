@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.dom4j.Element;
-
+/**
+ * 
+ * @author Guo Jiexin
+ */
 public class Reaction {
 
     public class Substrate {

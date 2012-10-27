@@ -15,14 +15,14 @@ public class UmlNode extends ResizableNode {
 	@Override
 	public int getHeight() {
             if(!this.mEntry.mGraphics.type.equals("circle"))
-		return Integer.parseInt(this.mEntry.mGraphics.height)+2;
+		return Integer.parseInt(this.mEntry.mGraphics.height)+3;
             else
                 return Integer.parseInt(this.mEntry.mGraphics.height);
 	}
 	@Override
 	public int getWidth() {	  
             if(!this.mEntry.mGraphics.type.equals("circle"))
-		return Integer.parseInt(this.mEntry.mGraphics.width)+2;	
+		return Integer.parseInt(this.mEntry.mGraphics.width)+4;	
             else
                 return Integer.parseInt(this.mEntry.mGraphics.width);
 	}

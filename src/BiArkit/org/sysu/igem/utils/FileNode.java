@@ -6,7 +6,10 @@ package org.sysu.igem.utils;
 
 import java.io.File;
 import javax.swing.tree.DefaultMutableTreeNode;
-
+/**
+ * 
+ * @author Wen Junqiang
+ */
 public class FileNode extends javax.swing.tree.DefaultMutableTreeNode {
 
     private boolean explored = false;

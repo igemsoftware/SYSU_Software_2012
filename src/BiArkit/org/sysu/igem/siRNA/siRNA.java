@@ -9,7 +9,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.sysu.igem.utils.StringUtils;
-
+/**
+ * 
+ * @author Miao Zong,Wen Junqiang
+ */
 public class siRNA {
 
     File fileIput; // = new File("p53.fasta");

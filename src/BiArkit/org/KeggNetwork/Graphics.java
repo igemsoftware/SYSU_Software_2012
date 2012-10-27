@@ -1,7 +1,10 @@
 package org.KeggNetwork;
 
 import org.dom4j.Element;
-
+/**
+ * 
+ * @author Guo Jiexin
+ */
 public class Graphics {
 
     public int getX() {

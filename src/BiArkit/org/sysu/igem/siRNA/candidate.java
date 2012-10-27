@@ -1,5 +1,8 @@
 package org.sysu.igem.siRNA;
-
+/**
+ * 
+ * @author Miao Zong,Wen Junqiang
+ */
 public class candidate {
 	private String sequence;
 	private int position;

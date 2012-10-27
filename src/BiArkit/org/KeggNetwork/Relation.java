@@ -5,7 +5,10 @@ import java.util.List;
 
 import org.dom4j.Element;
 
-
+/**
+ * A data class to store the relation 's data
+ * @author Guo Jiexin
+ */
 public class Relation {
 	public class SubType
 	{

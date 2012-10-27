@@ -1,5 +1,9 @@
 package org.KeggNetwork;
 import org.dom4j.Element;
+/**
+ * 
+ * @author Guo Jiexin
+ */
 public class PassWay {
 	public String name = "not init";
 	public String org = "not init";

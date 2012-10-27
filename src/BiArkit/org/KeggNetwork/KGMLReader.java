@@ -40,7 +40,7 @@ import twaver.TWaverConst;
 import twaver.network.TNetwork;
 
 /**
- * 
+ * The reader to read the kegg 's pathway
  * @author Guo Jiexin
  */
 public class KGMLReader {
@@ -68,7 +68,7 @@ public class KGMLReader {
      * the node that find out last time
      */
     public List<UmlNode> preFindedNodes = new ArrayList<UmlNode>();
-    private static Font font = new Font("微软雅黑", Font.PLAIN, 10);
+//    private static Font font = new Font("微软雅黑", Font.PLAIN, 10);
     /**
      * The file name that user opened
      */

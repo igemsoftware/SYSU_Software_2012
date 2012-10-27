@@ -1,5 +1,8 @@
 package org.sysu.igem.riboswitch;
-
+/**
+ * 
+ * @author Miao Zong
+ */
 public class sequence {
 	protected char[] sequence;
 	protected String[] antisense;

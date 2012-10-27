@@ -75,6 +75,7 @@ public class RJavaFrame extends JFrame {
 	private int boundary_reaction1 = -1;
 	private int boundary_reaction2 = -1;
 	private JDesktopPane desktop=new JDesktopPane();
+	private JCheckBox chckbxMutantFvaCheckBox;
 
 	public static void main(final String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -137,13 +138,13 @@ public class RJavaFrame extends JFrame {
 //		}
 		this.setTitle("IGEM FBA Solve");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 477, 342);
+		setBounds(100, 100, 479, 360);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		JPanel mainPanel = new JPanel();
-		mainPanel.setBounds(0, 0, 501, 297);
+		mainPanel.setBounds(0, 0, 461, 315);
 		contentPane.add(mainPanel);
 		mainPanel.setLayout(null);
 
@@ -201,7 +202,7 @@ public class RJavaFrame extends JFrame {
 				}
 			}
 		});
-		btnGo.setBounds(14, 245, 90, 27);
+		btnGo.setBounds(14, 275, 90, 27);
 		mainPanel.add(btnGo);
 
 		JButton btnEditReactions = new JButton("Edit Reactions");
@@ -217,7 +218,7 @@ public class RJavaFrame extends JFrame {
 							.ShowReactionSelectForm(RJavaFrame.this);
 			}
 		});
-		btnEditReactions.setBounds(14, 205, 145, 27);
+		btnEditReactions.setBounds(14, 235, 145, 27);
 		mainPanel.add(btnEditReactions);
 
 		chckbxExhaustivesingledeletion = new JCheckBox(
@@ -245,7 +246,7 @@ public class RJavaFrame extends JFrame {
 		chckbxReactionDeletion.setBounds(14, 72, 190, 27);
 		mainPanel.add(chckbxReactionDeletion);
 
-		chckbxFvaSlove = new JCheckBox("Fva Solve");
+		chckbxFvaSlove = new JCheckBox("FVA Solve");
 		chckbxFvaSlove.setBounds(14, 104, 172, 27);
 		mainPanel.add(chckbxFvaSlove);
 
@@ -267,39 +268,84 @@ public class RJavaFrame extends JFrame {
 				}
 			}
 		});
-		chckbxPreturbationAnalysis.setBounds(14, 136, 206, 27);
+		chckbxPreturbationAnalysis.setBounds(14, 167, 206, 27);
 		mainPanel.add(chckbxPreturbationAnalysis);
 
 		chckbxPhppAnalysis = new JCheckBox("PhPP ANALYSIS ");
 		chckbxPhppAnalysis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (chckbxPhppAnalysis.isSelected())
+				{
 					userInput = JOptionPane.showInputDialog(null,
 							"please input your carbon source", "");
+					if(userInput==null)
+					{
+						chckbxPhppAnalysis.setSelected(false);
+						return;
+					}
+				}
 				else
 					userInput = "";
 			}
 		});
-		chckbxPhppAnalysis.setBounds(14, 168, 190, 27);
+		chckbxPhppAnalysis.setBounds(14, 199, 190, 27);
 		mainPanel.add(chckbxPhppAnalysis);
 
 		lblSelectReaction = new JLabel("Select:null");
-		lblSelectReaction.setBounds(235, 76, 252, 18);
+		lblSelectReaction.setBounds(229, 76, 218, 18);
 		mainPanel.add(lblSelectReaction);
 
 		lblSelectPreturbation = new JLabel("Select:null");
-		lblSelectPreturbation.setBounds(233, 140, 226, 18);
+		lblSelectPreturbation.setBounds(230, 171, 226, 18);
 		mainPanel.add(lblSelectPreturbation);
+		
+		chckbxMutantFvaCheckBox = new JCheckBox("Mutant Fva");
+		chckbxMutantFvaCheckBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(chckbxMutantFvaCheckBox.isSelected())
+				{
+					if (RJavaFrame.this.filePath.length() == 0) {
+						JOptionPane.showMessageDialog(RJavaFrame.this,
+								"You hava not selected file yet!", "Warning!",
+								JOptionPane.INFORMATION_MESSAGE);
+						chckbxReactionDeletion.setSelected(false);
+					} else
+						
+						RJavaFrame.this.selectMutantFvaReactionFrom();
+				} else {
+					RJavaFrame.this.mutantFvaReactionSelected = 0;
+					RJavaFrame.this.lblMutantFvaLabel
+							.setText("Select:null");
+				}
+			}
+		});
+		chckbxMutantFvaCheckBox.setBounds(14, 135, 133, 27);
+		mainPanel.add(chckbxMutantFvaCheckBox);
+		
+		lblMutantFvaLabel = new JLabel("Select:null");
+		lblMutantFvaLabel.setBounds(229, 140, 223, 18);
+		mainPanel.add(lblMutantFvaLabel);
+		
+		JButton btnNewButton = new JButton("Get Advice?");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new newcomerJFrame().setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(173, 235, 148, 27);
+		mainPanel.add(btnNewButton);
 
 		String[] args = null;
 		re = new Rengine(args, false, new TextConsole());
 	}
+	/**
+	 * delete all .xls files in current directory
+	 */
 	public void deleteAllXls() {
-		// System.out.println(System.getProperty("user.dir"));
 		File[] files = this.getAllFileinDir(System.getProperty("user.dir"));
 		for (int i = 0; i < files.length; i++) {
 			if (files[i].getPath().toLowerCase().endsWith(".xls")) {
-				this.deleteFile(files[i].getPath());
+				RJavaFrame.deleteFile(files[i].getPath());
 			}
 		}
 	}
@@ -308,12 +354,11 @@ public class RJavaFrame extends JFrame {
 		File[] files = this.getAllFileinDir(System.getProperty("user.dir"));
 		for (int i = 0; i < files.length; i++) {
 			if (files[i].getPath().toLowerCase().endsWith(".pdf")) {
-				this.deleteFile(files[i].getPath());
+				RJavaFrame.deleteFile(files[i].getPath());
 			}
 		}
 	}
 	public void showAllPng(JDesktopPane desktop) {
-		// System.out.println(System.getProperty("user.dir"));
 		File[] files = this.getAllFileinDir(System.getProperty("user.dir"));
 		for (int i = 0; i < files.length; i++) {
 			if (files[i].getPath().toLowerCase().endsWith(".png")) {
@@ -332,7 +377,53 @@ public class RJavaFrame extends JFrame {
 		this.test = new rJava();
 		test.ReadSbml(fileName);
 	}
-
+	private int mutantFvaReactionSelected=-1;
+	/**
+	 * Create a frame that the user can select reaction for the reactionDeletion
+	 * Function
+	 */
+	public void selectMutantFvaReactionFrom() {
+		final JFrame frame = new JFrame("Select Reaction");
+		rJava.initDefaultFrame(frame);
+		JPanel panel = (JPanel) frame.getContentPane();
+		panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		JLabel tempLabel = new JLabel("");
+		tempLabel.setPreferredSize(new Dimension(380, 70));
+		tempLabel.setVisible(true);
+		panel.add(tempLabel);
+		JLabel label1 = new JLabel("Select which reaction?");
+		label1.setVisible(true);
+		this.mutantFvaReactionSelected = 0;
+		RJavaFrame.this.lblMutantFvaLabel.setText("Select:"
+				+ RJavaFrame.this.test.Reaction_list.get(0).id);
+		panel.add(label1);
+		String[] temp = new String[this.test.Reaction_list.size()];
+		for (int i = 0; i < this.test.Reaction_list.size(); i++)
+			temp[i] = this.test.Reaction_list.get(i).id;
+		final JComboBox selectReactionJComboBox = new JComboBox(temp);
+		selectReactionJComboBox.setMaximumRowCount(15);
+		selectReactionJComboBox.setVisible(true);
+		selectReactionJComboBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				RJavaFrame.this.mutantFvaReactionSelected = selectReactionJComboBox
+						.getSelectedIndex();
+				RJavaFrame.this.lblMutantFvaLabel.setText("Select:"
+						+ RJavaFrame.this.test.Reaction_list
+								.get(mutantFvaReactionSelected).id);
+				System.out.println("mutant"+RJavaFrame.this.mutantFvaReactionSelected);
+			}
+		});
+		panel.add(selectReactionJComboBox);
+		JButton finishButton = new JButton("finish");
+		finishButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+			}
+		});
+		panel.add(finishButton);
+	}
 	public void selectPreturbationFrom() {
 		final JFrame frame = new JFrame("Select reaction");
 		rJava.initDefaultFrame(frame);
@@ -374,7 +465,7 @@ public class RJavaFrame extends JFrame {
 		});
 		panel.add(finishButton);
 	}
-
+	
 	/**
 	 * Create a frame that the user can select reaction for the reactionDeletion
 	 * Function
@@ -540,7 +631,8 @@ public class RJavaFrame extends JFrame {
 			}
 			use.finish();
 			this.setProgress(100);
-			RJavaFrame.this.test.readFluxByLines("fluxes.txt");
+			
+//			RJavaFrame.this.test.readFluxByLines("fluxes.txt");
 			
 			JFrame mainFrame = new JFrame("Resulting");
 			rJava.initDefaultFrame(mainFrame);
@@ -598,11 +690,22 @@ public class RJavaFrame extends JFrame {
 			if (RJavaFrame.this.chckbxPreturbationAnalysis.isSelected()) {
 				RJavaFrame.this.showAllPng(desktop);
 			}
+			if(RJavaFrame.this.chckbxMutantFvaCheckBox.isSelected())
+			{
+				JInternalFrame tempframe = RJavaFrame.this.test.ShowMutantFvaSolveForm();
+				if(tempframe!=null)
+					desktop.add(tempframe);
+				else
+					JOptionPane.showMessageDialog(null, "No Mutant reactions", "Warning",
+							JOptionPane.WARNING_MESSAGE);
+			}
 			if(RJavaFrame.this.chckbxPhppAnalysis.isSelected())
 			{
 				re.eval("source(\"rtemp//choose.r\")");
 				String carbonName = "glucose";
-				if (!userInput.equals(""))
+				if(userInput==null)
+					;
+				else if (!userInput.equals(""))
 					carbonName = userInput;
 				carbonName = "\"" + carbonName + "\"";
 				System.out
@@ -613,10 +716,6 @@ public class RJavaFrame extends JFrame {
 				re.eval("write.table(carbonreactionList,file=\"carbon.txt\")");
 				selectCarbonReactionFrame = this.frame
 						.selectCarbonReactionForm(carbonName);
-				//System.out.println("here");
-				
-				
-				
 			}
 			mainFrame.getContentPane().add(desktop);
 			mainFrame.show();
@@ -656,6 +755,7 @@ public class RJavaFrame extends JFrame {
 			StringBuilder matrix =new StringBuilder("rxnGeneMat=matrix(c(");
 			int col = this.frame.test.mAllGene_List.size();
 			int row = this.frame.test.Reaction_list.size();
+//			System.out.println(col+" "+row);
 			int[][] numMatrix = new int[row][col];
 			for (int i = 0; i < row; i++) {
 				for (int j = 0; j < col; j++) {
@@ -681,10 +781,11 @@ public class RJavaFrame extends JFrame {
 		public String GetMatrixBackground() {
 			StringBuilder matrix = new StringBuilder("matr=matrix(c(");
 			final int row = this.frame.test.Species_list.size();// -this.rowToIgnore;
-			//System.out.println(row);
 			final int col = this.frame.test.Reaction_list.size();
+			System.out.println(row+" "+col);
 			//System.out.println(col);
-			BigDecimal [][] numMatrix = new BigDecimal[row][col];		
+//			BigDecimal [][] numMatrix = new BigDecimal[row][col];
+			String [][] numMatrix = new String[row][col];
 			for (int i = 0; i < this.frame.test.Reaction_list.size(); i++) {
 				for (int j = 0; j < this.frame.test.Reaction_list.get(i).mReactants.size(); j++) {
 					int reactant = this.frame.test
@@ -696,7 +797,7 @@ public class RJavaFrame extends JFrame {
 				for (int j = 0; j < this.frame.test.Reaction_list.get(i).mProducts.size(); j++) {
 					int product = this.frame.test
 							.findSpecieByName(this.frame.test.Reaction_list.get(i).mProducts.get(j).species);
-					numMatrix[product][i] = this.frame.test.Reaction_list.get(i).mProducts.get(j).stoichiometry.negate();
+					numMatrix[product][i] = "-"+this.frame.test.Reaction_list.get(i).mProducts.get(j).stoichiometry;
 				}			
 			}
 			for (int j = 0; j < col; j++)
@@ -728,19 +829,18 @@ public class RJavaFrame extends JFrame {
 			if (!re.waitForR())
 				return null;
 			re.eval("max=TRUE");
-			System.out.println("max=TRUE");
+//			System.out.println("size"+this.frame.test.Reaction_list.size());
 			// After this are all R commands
 			// GetMatrix() and GetRxnGeneMat() need most of time
 			this.publish(new Message("Loading Matrix", 2));
 			String temp = this.GetMatrixBackground();//test.GetMatrix();
 			re.eval(temp);
+//			System.out.println(temp);
 			temp = null;
 			this.publish(new Message("Loading Object", 12));
 			temp = test.GetObj();
 			re.eval(temp);
 			temp = null;
-			System.gc();
-			System.runFinalization();
 			this.publish(new Message("Loading LowerValue", 20));
 			temp = test.GetLowerVal();
 			re.eval(temp);
@@ -748,7 +848,7 @@ public class RJavaFrame extends JFrame {
 			this.publish(new Message("Loading UpperValue",30));
 			temp = test.GetUpperVal();
 			re.eval(temp);
-			System.out.println(temp);
+//			System.out.println(temp);
 			temp = null;
 			this.publish(new Message("Loading Reaction_list",35));
 			temp = test.GetReaction_list();
@@ -765,6 +865,7 @@ public class RJavaFrame extends JFrame {
 			this.publish(new Message("Loading RxnGeneMatrix",60));
 			temp = this.GetRxnGeneMatBackground();//test.GetRxnGeneMat();
 			re.eval(temp);
+			System.out.println(temp);
 			temp = null;
 			temp = test.GetSubSystem();
 			re.eval(temp);
@@ -783,17 +884,14 @@ public class RJavaFrame extends JFrame {
 			re.eval("a=FBA_solve(testda)");
 			System.out.println(re.eval("testda"));
 			re.eval("write.table(a$fluxes,file=\"fluxes.txt\")");
+//			re.eval("write.table(testda$mat,file=\"mat.txt\")");
 			if (RJavaFrame.this.chckbxExhaustivesingledeletion.isSelected()) {
-//				re.eval("x=1");
-//				re.eval("y=1");
-//				re.eval("plot(x,y)");
 				re.eval("source(\"rtemp//Exhaustive.r\")");
 				this.publish(new Message("R is caculating Exhaustive_single_knockout",68));
 				re.eval("A=Exhaustive_single_knockout(fba_object=testda,plot_to_file=TRUE)");
-				System.out
-						.println("A=Exhaustive_single_knockout(fba_object=testda,plot_to_file=TRUE)");
 				this.publish(new Message("Reading files",75));
 				re.eval("write.table(A$biomass_all,file=\"biomass.txt\")");
+				
 				re.eval("write.table(A$lethal_dels,file=\"lethal.txt\")");
 				re.eval("write.table(A$sub_optimal_dels,file=\"sub_optimal_dels.txt\")");
 				re.eval("write.table(A$super_optimal_dels,file=\"super_optimal_dels.txt\")");
@@ -825,18 +923,28 @@ public class RJavaFrame extends JFrame {
 				re.eval("write.table(c[,5] ,file=\"5.txt\")");
 			}
 			if (this.frame.chckbxPreturbationAnalysis.isSelected()) {
-				System.out.println("A=perturbation("
-						+ this.frame.preturbationSelected + 1 + ",testda)");
+//				System.out.println("A=perturbation("
+//						+ this.frame.preturbationSelected + 1 + ",testda)");
 				this.publish(new Message("Caculating perturbation",85));
 				re.eval("source(\"rtemp//perturbation.r\")");
-				re.eval("A=perturbation(" + this.frame.preturbationSelected + 1
+				re.eval("A=perturbation(" + (this.frame.preturbationSelected + 1)
 						+ ",testda)");
 				re.eval("dev.off()");
 			}
 			if (this.frame.chckbxPhppAnalysis.isSelected()) {
 				
 			}
-			// Clean the R memory
+			if(this.frame.chckbxMutantFvaCheckBox.isSelected())
+			{
+				re.eval("source(\"rtemp//mfva.r\")");
+				this.publish(new Message("Caculating mutantFva",95));
+				System.out.println(this.frame.mutantFvaReactionSelected);
+				System.out.println(re.eval("result=mfva(fba_object=testda,"+(this.frame.mutantFvaReactionSelected+1)+")"));
+				
+				re.eval("write.table(result[,1] ,file=\"1_1.txt\")");
+				re.eval("write.table(result[,2] ,file=\"1_2.txt\")");
+				re.eval("write.table(result[,3] ,file=\"1_3.txt\")");
+			}
 			re.eval("rm()");
 			re.eval("gc()");
 			return null;
@@ -860,17 +968,17 @@ public class RJavaFrame extends JFrame {
 				.append(this.boundary_reaction2 + 1);
 		php.append("),fba_object=testda,").append(this.carbon_reaction)
 				.append(")");
-		System.out.println(php);
+//		System.out.println(php);
 		re.eval(php.toString());
 		this.extraMenu.setEnabled(true);
 		new ShowBmp("PHPP.bmp", desktop)
 		.setVisible(true);
-
 		this.tileWindows(desktop);
 	}
 
 	private int selectBoundaryReactionCount = 0;
 	private JMenu extraMenu;
+	private JLabel lblMutantFvaLabel;
 
 	/**
 	 * To create a jframe that user can select two boundary reactions
@@ -1021,5 +1129,4 @@ public class RJavaFrame extends JFrame {
 			}
 		}
 	}
-
 }

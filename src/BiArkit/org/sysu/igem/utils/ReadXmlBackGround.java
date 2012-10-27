@@ -19,8 +19,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
- * @author Administrator
+ *To read xml in background using SwingWorker
+ * @author Guo Jiexin
  */
 public class ReadXmlBackGround extends SwingWorker<List<Element>, Void> {
 

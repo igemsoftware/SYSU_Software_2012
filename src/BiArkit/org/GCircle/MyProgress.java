@@ -30,8 +30,7 @@ public class MyProgress extends JFrame {
                 try {
                     MyProgress frame = new MyProgress();
                     frame.setVisible(true);
-                } catch (Exception e) {
-                    //e.printStackTrace();
+                } catch (Exception e) {                    
                 }
             }
         });

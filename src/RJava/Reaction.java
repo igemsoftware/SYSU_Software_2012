@@ -7,19 +7,22 @@ public class Reaction {
 	public class specieRef
 	{
 		public String species="";
-		//public double stoichiometry=0;
-		public BigDecimal stoichiometry=null;
+//		public double stoichiometry=0;
+//		public BigDecimal stoichiometry=null;
+		public String stoichiometry=null;
 		public specieRef(final Element element)
 		{
 			this.species=element.attributeValue("species");
 			String temp=element.attributeValue("stoichiometry");
-			//double temp2=Double.parseDouble(temp);
-			stoichiometry=new BigDecimal(temp);
+//			double temp2=Double.parseDouble(temp);
+//			System.out.println(temp2);
+			this.stoichiometry=temp;
+//			stoichiometry=new BigDecimal(temp);
 		}
 		public void PrintAll()
 		{
 			System.out.print(this.species+' ');
-			System.out.print(this.stoichiometry.toString()+' ');
+			System.out.print(this.stoichiometry+' ');
 			System.out.println();
 		}
 	}

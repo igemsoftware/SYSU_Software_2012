@@ -10,7 +10,7 @@ import org.jdom.Element;
 import org.sysu.igem.utils.ReadXml;
 
 /**
- *
+ *The data class of genome
  * @author q
  */
 public class Genome {

@@ -207,7 +207,47 @@ public class rJava {
 		}
 		return toReturn;
 	}
+	public JInternalFrame ShowMutantFvaSolveForm() {
+		if(!new File("1_1.txt").exists())
+			return null;
+		JInternalFrame frame = new JInternalFrame("Mutant FVA", true, true,
+				true, true); // create a titled JFrame Object
+		rJava.initDefaultFrame(frame);
+		frame.setSize(600, 600);
+		JPanel panel = new JPanel();
+		List<String> list1 = this.getSecondColString("1_1.txt");
+		List<String> list2 = this.getSecondColString("1_2.txt");
+		List<String> list3 = this.getSecondColString("1_3.txt");
+		RJavaFrame.deleteFile("1_1.txt");
+		RJavaFrame.deleteFile("1_2.txt");
+		RJavaFrame.deleteFile("1_3.txt");
+		System.out.println(list1.size());
+		panel.setLayout(new GridLayout(list1.size()+1,2));
 
+		JLabel label1 = new JLabel("reaction_list");
+		label1.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 18));
+		JLabel label2 = new JLabel("Mutant Span");
+		label2.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 18));
+		JLabel label3 = new JLabel("Wild-type Span");
+		label3.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 18));
+		panel.add(label1);
+		panel.add(label2);
+		panel.add(label3);
+		for (int i = 0; i < list1.size(); i++) {
+			int reaction_id=Integer.parseInt(list1.get(i).substring(1, list1.get(i).length()-1));
+			panel.add(new JLabel(this.Reaction_list.get(reaction_id-1).id));
+			panel.add(new JLabel(list2.get(i).substring(1, list2.get(i).length()-1)));
+			panel.add(new JLabel(list3.get(i).substring(1, list3.get(i).length()-1)));
+		}
+		JScrollPane scrollPane = new JScrollPane(panel);
+		scrollPane.setViewportView(panel);
+		frame.getContentPane().add(scrollPane);
+		return frame;
+	}
+	public static String getStrignwithoutFrontAndLastDoubleQuote(String str)
+	{
+		return str.substring(1,str.length()-1);
+	}
 	public JInternalFrame ShowFvaSolveForm() {
 		JInternalFrame frame = new JInternalFrame("FVA Solve", true, true,
 				true, true); // create a titled JFrame Object
@@ -240,13 +280,13 @@ public class rJava {
 		panel.add(label3);
 		panel.add(label4);
 		panel.add(label5);
-		System.out.println(list1.size());
-		for (int i = 0; i < list1.size(); i++) {
-			panel.add(new JLabel(list1.get(i)));
-			panel.add(new JLabel(list2.get(i)));
-			panel.add(new JLabel(list3.get(i)));
-			panel.add(new JLabel(list4.get(i)));
-			panel.add(new JLabel(list5.get(i)));
+//		System.out.println(list1.size());
+		for (int i = 0; i < list1.size(); i++) {			
+			panel.add(new JLabel(getStrignwithoutFrontAndLastDoubleQuote(list1.get(i))));
+			panel.add(new JLabel(getStrignwithoutFrontAndLastDoubleQuote(list2.get(i))));
+			panel.add(new JLabel(getStrignwithoutFrontAndLastDoubleQuote(list3.get(i))));
+			panel.add(new JLabel(getStrignwithoutFrontAndLastDoubleQuote(list4.get(i))));
+			panel.add(new JLabel(getStrignwithoutFrontAndLastDoubleQuote(list5.get(i))));
 		}
 		JScrollPane scrollPane = new JScrollPane(panel);
 		scrollPane.setViewportView(panel);
@@ -444,7 +484,8 @@ public class rJava {
 	}
 
 	public JInternalFrame showFBA_solveForm(final Rengine re) {
-		JInternalFrame frame = new JInternalFrame("Fba Solve", true, true,
+		this.readFluxByLines("fluxes.txt");
+		JInternalFrame frame = new JInternalFrame("FBA Solve", true, true,
 				true, true); 
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
 		frame.setLocation(0, 0);
@@ -470,7 +511,7 @@ public class rJava {
 		JLabel label2 = new JLabel("fluxes");
 		label2.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 18));
 		panel.add(label2);
-		for (int i = 0; i < this.Reaction_list.size(); i++) {
+		for (int i = 0; i < this.Reaction_list.size()&&i<this.mFluxes.size(); i++) {
 			JLabel reaction = new JLabel(this.Reaction_list.get(i).id);
 			//BigDecimal bg=new BigDecimal(this.mFluxes.get(i).toString()); 
 			JLabel fluxes = new JLabel(this.mFluxes.get(i));
@@ -484,12 +525,20 @@ public class rJava {
 	}
 
 	public void addBiomassToPanel(String fileName, JPanel panel) {
-		JLabel title = new JLabel("Biomass Reaction");
-		title.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 18));
-		panel.add(title);
-		JLabel templ = new JLabel("              ");
-		templ.setVisible(false);
-		panel.add(templ);
+//		JLabel title = new JLabel("Biomass Reaction");
+//		title.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 18));
+//		panel.add(title);
+//		JLabel templ = new JLabel("              ");
+//		templ.setVisible(false);
+//		panel.add(templ);
+		JLabel temp2 = new JLabel("Reaction name");
+		temp2.setVisible(true);
+		temp2.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 18));
+		panel.add(temp2);
+		JLabel temp3 = new JLabel("Objective fluxes");
+		temp3.setVisible(true);
+		temp3.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 18));
+		panel.add(temp3);
 		if (fileName.equals(""))
 			fileName = "biomass.txt";
 		File file = new File(fileName);
@@ -500,10 +549,15 @@ public class rJava {
 			int line = 1;
 			while ((tempString = reader.readLine()) != null) {
 				if (line != 1 && line <= this.Reaction_list.size()) {
+					if(line==1||line==2)
+					{
+						line++;
+						continue;
+					}
 					String[] temp = tempString.split(" ");
 					//System.out.println(line + " " + this.Reaction_list.size());
 					JLabel reaction = new JLabel(
-							this.Reaction_list.get(line - 2).id);
+							this.Reaction_list.get(line - 3).id);
 					panel.add(reaction);
 					JLabel biomass = new JLabel(temp[1]);
 					panel.add(biomass);
@@ -654,6 +708,8 @@ public class rJava {
 		if (fileName.equals(""))
 			fileName = "fluxes.txt";
 		File file = new File(fileName);
+		if(!file.exists())
+			return;
 		BufferedReader reader = null;
 		try {
 			reader = new BufferedReader(new FileReader(file));
@@ -688,7 +744,8 @@ public class rJava {
 		//System.out.println(row);
 		final int col = this.Reaction_list.size();
 		//System.out.println(col);
-		BigDecimal[][] numMatrix = new BigDecimal[row][col];		
+//		BigDecimal[][] numMatrix = new BigDecimal[row][col];	
+		String[][] numMatrix = new String[row][col];	
 		for (int i = 0; i < this.Reaction_list.size(); i++) {
 			for (int j = 0; j < Reaction_list.get(i).mReactants.size(); j++) {
 				int reactant = this
@@ -699,7 +756,7 @@ public class rJava {
 			for (int j = 0; j < Reaction_list.get(i).mProducts.size(); j++) {
 				int product = this
 						.findSpecieByName(Reaction_list.get(i).mProducts.get(j).species);
-				numMatrix[product][i] = Reaction_list.get(i).mProducts.get(j).stoichiometry.negate();
+				numMatrix[product][i] = "-"+Reaction_list.get(i).mProducts.get(j).stoichiometry;
 			}			
 		}
 		//System.out.println(col);
