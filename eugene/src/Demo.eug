@@ -1,0 +1,21 @@
+//Demo example
+//Douglas Densmore
+
+Property sequence(txt);
+Property name(txt);
+Property relativeStrength(num);
+Property Neg10Neg35(txt[]);
+
+Part Promoter(name, sequence, relativeStrength);
+Part SpecialPromoter(name, sequence, Neg10Neg35);
+
+Promoter p1("PromoterType1", "ATC", 10);
+Promoter p2(.sequence("ATCCCCC"));
+SpecialPromoter p3 ("PromoterType2", "CAT", ["CAT", "TAG"]);
+
+Device d1(p2, p3, p1);
+
+print(p1.sequence);
+print(p3.name);
+print(d1[0].sequence);
+

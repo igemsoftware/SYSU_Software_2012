@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Rsrc-Class-Path: ./ xerces.jar antlr-3.4-complete.jar jakarta-regexp.j
+ ar libSBOL.jar biojava-1.30.jar bytecode-0.91.jar
+Class-Path: .
+Rsrc-Main-Class: eugene.Eugene
+Main-Class: org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader
+
