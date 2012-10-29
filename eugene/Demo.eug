@@ -15,7 +15,7 @@ SpecialPromoter p3 ("PromoterType2", "CAT", ["CAT", "TAG"]);
 
 Device d1(p2, p3, p1);
 
-print(p1.sequence);
-print(p3.name);
-print(d1[0].sequence);
+//print(p1.sequence);
+//print(p3.name);
+//print(d1[0].sequence);
 

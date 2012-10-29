@@ -11,8 +11,10 @@ import org.antlr.runtime.RecognitionException;
 
 import antlr.TokenStreamSelector;
 import eugene.Eugene;
+import eugene.dom.Variable;
 import eugene.parser.EugeneLexer;
 import eugene.parser.EugeneParser;
+import eugene.tools.XMLToEugeneHeader;
 
 public class SysuGene
 {
@@ -23,15 +25,18 @@ public class SysuGene
 	public SysuGene(String sysuGeneFile)
 	{
 		try
-		{
+		{			
 			File eugFile = new File(sysuGeneFile);
-			lexer = new EugeneLexer(new ANTLRFileStream(eugFile.getAbsolutePath()));
+//			File tempFile=
+			ANTLRFileStream inputsteam=new ANTLRFileStream(eugFile.getAbsolutePath());
+//			inputsteam.
+			lexer = new EugeneLexer();
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			
 			parser = new EugeneParser(tokens);
-			
 			parser.initSymbolTables();
 			parser.prog();
+//			XMLToEugeneHeader xmlToHeader = new XMLToEugeneHeader();
+//			xmlToHeader.run();
 		//	parser.cleanUpNoExit();
 		}
 		catch (IOException ioe) {
@@ -41,14 +46,14 @@ public class SysuGene
 		}
 	}
 
-	public static void main(String[] args)
-	{
-		/*
-		if (args.length != 1) {
-			System.err.println("Usage: java -jar eugene.jar <eugene-file>");
-			System.exit(1);
-		}
-		*/
-		new SysuGene("Demo.eug");//args[0]);
-	}
+//	public static void main(String[] args)
+//	{
+//		/*
+//		if (args.length != 1) {
+//			System.err.println("Usage: java -jar eugene.jar <eugene-file>");
+//			System.exit(1);
+//		}
+//		*/
+//		new SysuGene("Demo.eug");//args[0]);
+//	}
 }
