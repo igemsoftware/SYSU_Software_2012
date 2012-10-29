@@ -12,6 +12,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -19,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.tree.TreePath;
 import org.KeggNetwork.KGMLReader;
 import org.igem.browser.Browser;
 
@@ -100,6 +103,22 @@ public class FindXmlIncludeString {
 
             public void valueChanged(ListSelectionEvent e) {
                 if (!xmlJList.getSelectedValue().equals("no result!")) {
+//                        System.out.println("1"+xmls.get(xmlJList.getSelectedIndex()).getAbsolutePath());
+//                        String[] temp=xmls.get(xmlJList.getSelectedIndex()).getAbsolutePath().split("\\\\");
+//                        int place=0;
+//                        for(int i=0;i<temp.length;i++)
+//                        {
+//                            System.out.println(temp[i]);
+//                            if(temp[i].equals("biobrick"))
+//                               place=i;
+//                        }
+//                        Object[] temp2=new Object[temp.length-place];
+//                        System.out.println(temp.length-place);
+//                        int size=0;
+//                        for(int i=place;i<temp.length;i++)
+//                            temp2[size++]=temp[i];
+//                        TreePath path=new TreePath(temp2);
+//                    FindXmlIncludeString.this.browser.jTree1.setSelectionPath(path);
                     FindXmlIncludeString.this.browser.initbiobrick(xmls.get(xmlJList.getSelectedIndex()).getAbsolutePath());
                 }
                 frame.dispose();
@@ -109,7 +128,7 @@ public class FindXmlIncludeString {
         frame.getContentPane().setLayout(new BorderLayout());
         frame.getContentPane().add(scrollpane, BorderLayout.CENTER);
     }
-
+    
     public void createKeggXmlSelectForm(String str) throws FileNotFoundException, IOException {
         final JFrame frame = new JFrame("Show kegg search result");
         frame.setSize(400, 400);

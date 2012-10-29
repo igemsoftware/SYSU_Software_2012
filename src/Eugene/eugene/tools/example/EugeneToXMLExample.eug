@@ -1,0 +1,12 @@
+Property ID(txt);
+Property Sequence(txt);
+Property Description(txt);
+Property LongDescription(txt);
+Property Length(num);
+Property Orientation(txt);
+Part Promoter(ID, Sequence, Description, LongDescription, Length, Orientation);
+Part RBS(ID, Sequence, Description, LongDescription, Length, Orientation);
+Part ORF(ID, Sequence, Description, LongDescription, Length, Orientation);
+Promoter p1("p1_identifier", "AAAA", "p1_name", "p1_description", 1, "Forward");
+RBS rbs1("rbs1_identifier", "TTTT", "rbs1_name", "rbs1_description", 2, "Reverse");
+ORF orf1("orf1_identifier", "CCCC", "orf1_name", "orf1_description", 3, "Bidirectional");

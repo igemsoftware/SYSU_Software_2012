@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<registry>
+    <part>
+        <identifier>BBa_I0500</identifier>
+        <type>Promoter</type>
+        <name>Inducible pBad/araC promoter</name>
+        <description type="string"></description>
+        <sequence>GATCTttatgacaacttgacggctacatcattcactttttcttcacaaccggcacggaactcgctcgggctggccccggtgcattttttaaatacccgcgagaaatagagttgatcgtcaaaaccaacattgcgaccgacggtggcgataggcatccgggtggtgctcaaaagcagcttcgcctggctgatacgttggtcctcgcgccagcttaagacgctaatccctaactgctggcggaaaagatgtgacagacgcgacggcgacaagcaaacatgctgtgcgacgctggcgatatcaaaattgctgtctgccaggtgatcgctgatgtactgacaagcctcgcgtacccgattatccatcggtggatggagcgactcgttaatcgcttccatgcgccgcagtaacaattgctcaagcagatttatcgccagcagctccgaatagcgcccttccccttgcccggcgttaatgatttgcccaaacaggtcgctgaaatgcggctggtgcgcttcatccgggcgaaagaaccccgtattggcaaatattgacggccagttaagccattcatgccagtaggcgcgcggacgaaagtaaacccactggtgataccattcgcgagcctccggatgacgaccgtagtgatgaatctctcctggcgggaacagcaaaatatcacccggtcggcaaacaaattctcgtccctgatttttcaccaccccctgaccgcgaatggtgagattgagaatataacctttcattcccagcggtcggtcgataaaaaaatcgagataaccgttggcctcaatcggcgttaaacccgccaccagatgggcattaaacgagtatcccggcagcaggggatcattttgcgcttcagccatacttttcatactcccgccattcagagaagaaaccaattgtccatattgcatcagacattgccgtcactgcgtcttttactggctcttctcgctaaccaaaccggtaaccccgcttattaaaagcattctgtaacaaagcgggaccaaagccatgacaaaaacgcgtaacaaaagtgtctataatcacggcagaaaagtccacattgattatttgcacggcgtcacactttgctatgccatagcatttttatccataagattagcggatcctacctgacgctttttatcgcaactctctactgtttctccatacccgtttttttgggctagcG</sequence>
+        <size>1210</size>
+        <orientation>+</orientation>
+    </part>
+    <part>
+        <identifier>BBa_K112805</identifier>
+        <type>ORF</type>
+        <name>T4 holin</name>
+        <description type="string">Holins from T4 bacteriophage assemble together to form pores on inner membrane of bacteria allowing lysozyme to reach periplasm and degrade peptidoglycan layer.</description>
+        <sequence>GATCTcttaaaaggagggtctatggcagcacctagaatatcattttcgccctctgatattctatttggtgttctcgatcgcttgttcaaagataacgctaccgggaaggttcttgcttcccgggtagctgtcgtaattcttttgtttataatggcgattgtttggtataggggagatagtttctttgagtactataagcaatcaaagtatgaaacatacagtgaaattattgaaaaggaaagaactgcacgctttgaatctgtcgccctggaacaactccagatagttcatatatcatctgaggcagactttagtgcggtgtattctttccgccctaaaaacttaaactattttgttgatattatagcatacgaaggaaaattaccttcaacaataagtgaaaaatcacttggaggatatcctgttgataaaactatggatgaatatacagttcatttaaatggacgtcattattattccaactcaaaatttgcttttttaccaactaaaaagcctactcccgaaataaactacatgtacagttgtccatattttaatttggataatatctatgctggaacgataaccatgtactggtatagaaatgatcatataagtaatgaccgccttgaatcaatatgtgctcaggcggccagaatattaggaagggctaaataattaG</sequence>
+        <size>676</size>
+        <orientation>+</orientation>
+    </part>
+    <part>
+        <identifier>BBa_K112806</identifier>
+        <type>ORF</type>
+        <name>T4 endolysin</name>
+        <description type="string">The lysozyme from enterobacteria phage T4 degrades peptidoglycan layer.</description>
+        <sequence>GATCTatacttaggaggtattatgaatatatttgaaatgttacgtatagatgaaggtcttagacttaaaatctataaagacacagaaggctattacactattggcatcggtcatttgcttacaaaaagtccatcacttaatgctgctaaatctgaattagataaagctattgggcgtaattgcaatggtgtaattacaaaagatgaggctgaaaaactctttaatcaggatgttgatgctgctgttcgcggaatcctgagaaatgctaaattaaaaccggtttatgattctcttgatgcggttcgtcgctgtgcattgattaatatggttttccaaatgggagaaaccggtgtggcaggatttactaactctttacgtatgcttcaacaaaaacgctgggatgaagcagcagttaacttagctaaaagtagatggtataatcaaacacctaatcgcgcaaaacgagtcattacaacgtttagaactggcacttgggacgcgtataaaaatctataaagcG</sequence>
+        <size>514</size>
+        <orientation>+</orientation>
+    </part>
+    <part>
+        <identifier>BBa_B0010</identifier>
+        <type>Terminator</type>
+        <name>T1 from E. coli rrnB</name>
+        <description type="string">Transcriptional terminator consisting of a 64 bp stem-loop.</description>
+        <sequence>GATCTccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctcG</sequence>
+        <size>80</size>
+        <orientation>+</orientation>
+    </part>
+    <part>
+        <identifier>BBa_B0012</identifier>
+        <type>Terminator</type>
+        <name>TE from coliphageT7</name>
+        <description type="string">Transcription terminator for the E.coli RNA polymerase. This is a bad terminator. It is a promoter in the reverse direction.</description>
+        <sequence>GATCTtcacactggctcaccttcgggtgggcctttctgcgtttataG</sequence>
+        <size>41</size>
+        <orientation>+</orientation>
+    </part>
+    <part>
+        <identifier>BBa_J23116</identifier>
+        <type>Promoter</type>
+        <name>Constitutive promoter family member</name>
+        <description type="string"></description>
+        <sequence>GATCTttgacagctagctcagtcctagggactatgctagcG</sequence>
+        <size>35</size>
+        <orientation>+</orientation>
+    </part>
+    <part>
+        <identifier>BBa_K112807</identifier>
+        <type>ORF</type>
+        <name>T4 antiholin</name>
+        <description type="string">Antiholin binds holin and prevents holin multimers from forming pores on the inner membrane of bacteria.</description>
+        <sequence>GATCTgataggaggcctttatggccttaaaagcaacagcactttttgccatgctaggattgtcatttgttttatctccatcgattgaagcgaatgtcgatcctcattttgataaatttatggaatctggtattaggcacgtttatatgctttttgaaaataaaagcgtagaatcgtctgaacaattctatagttttatgagaacgacctataaaaatgacccgtgctcttctgattttgaatgtatagagcgaggcgcggagatggcacaatcatacgctagaattatgaacattaaattggagactgaatgaaatG</sequence>
+        <size>311</size>
+        <orientation>+</orientation>
+    </part>
+</registry>

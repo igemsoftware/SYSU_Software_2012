@@ -482,6 +482,7 @@ public class Browser extends javax.swing.JFrame {
      */
     public void initbiobrick(String path) {
         biobrickPanel.setBackground(Color.white);
+        biobrickPanel.removeAll();
         if (path.isEmpty()) {
             return;
         }
@@ -1084,6 +1085,7 @@ public class Browser extends javax.swing.JFrame {
         FbaMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
 
@@ -1186,7 +1188,7 @@ public class Browser extends javax.swing.JFrame {
                 jLabel51MouseExited(evt);
             }
         });
-        HomePagePanel.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 220, 230));
+        HomePagePanel.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 210, 230));
 
         jLabel53.setToolTipText("<html><BODY STYLE=\"BACKGROUND-COLOR:#FFFFFF;\"><font size=\"5\" face=\"Verdana\">With this browser, researchers can surf for genomes from the typical model organisms.<br>Users can locate the interested genes in terms of the input items, <br>including name, product or coordinate. In addition, <br>new genomes data will be saved on our website as downloadable contents.</html> "); // NOI18N
         jLabel53.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2484,6 +2486,16 @@ public class Browser extends javax.swing.JFrame {
         });
         FbaMenu.add(jMenuItem3);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setFont(new java.awt.Font("Arial Black", 0, 15)); // NOI18N
+        jMenuItem2.setText("SBOLConverter");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        FbaMenu.add(jMenuItem2);
+
         menuBar.add(FbaMenu);
 
         helpMenu.setBackground(java.awt.Color.white);
@@ -3177,6 +3189,14 @@ public class Browser extends javax.swing.JFrame {
             jScrollPane4.validate();
 		}//GEN-LAST:event_submitBtnMouseClicked
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        try {
+            Runtime.getRuntime().exec("cmd /c start runSbolConverter.bat");
+        } catch (IOException ex) {
+            Logger.getLogger(Browser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     public boolean isNumber(String str) {
         if (java.lang.Character.isDigit(str.charAt(0))) {
             return true;
@@ -3276,6 +3296,7 @@ public class Browser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
@@ -3316,7 +3337,7 @@ public class Browser extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTree jTree1;
+    public javax.swing.JTree jTree1;
     private javax.swing.JTextField keggFindElementTextField;
     private javax.swing.JButton keggFindElementsButton;
     private javax.swing.JLabel lengthLabel;
