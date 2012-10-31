@@ -18,7 +18,9 @@ BiArkit Project .rar - including open source code of BiArkit, which is provided 
 
 install . txt - including the guides for users to install BiArkit.
 
-BiArkit_windows_1_00.exe - including Setup of BiArkit.
+BiArkit_windows_1_05.exe - including Setup of BiArkit.
+
+clothoBiArkitApp.zip - including open source code and Setup of BiArkit integrated into Clotho frame.
 
 Tutorial - including the guides for using BiArkit.
 
