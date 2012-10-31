@@ -18,9 +18,11 @@ BiArkit Project .rar - including open source code of BiArkit, which is provided 
 
 install.txt - including the guides for users to install BiArkit.
 
-BiArkit_windows_1_05.exe - including Setup of BiArkit.
+<B>BiArkit_windows_1_05.exe</B> - including Setup of BiArkit.
 
 clothoBiArkitApp.zip - including open source code and Setup of BiArkit integrated into Clotho frame.
+
+eugene - an expansion tool for Eugene platform for processing texture file.
 
 Tutorial - including the guides for using BiArkit.
 
