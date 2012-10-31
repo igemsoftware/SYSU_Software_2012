@@ -59,17 +59,20 @@ public class XMLParser {
 	{
 		 try {
 			FileWriter out = new FileWriter(file);
-			out.write(this.selfBiobrick+"\r\n");
+			
 			out.write("Property sequence(txt);\r\n"+"Property name(txt);\r\n");
-			out.write("Property ID(txt);\r\n"+"DISPLAYID(num);\r\n");
+			out.write("Property ID(txt);\r\n"+"Property DISPLAYID(num);\r\n");
 			out.write("Property Description(txt);\r\n"+"Property SEQUENCES(txt);\r\n");
 			out.write("Property TYPE(txt);\r\n");
 			out.write("Part Biobrick(ID, DISPLAYID, Description,SEQUENCES,TYPE);\r\n");
 			out.write("Part Subpart(ID, DISPLAYID, Description,TYPE);\r\n");
-			
+			out.write(this.selfBiobrick+"\r\n");
 			for(int i=0;i<this.subparts.size();i++)
-				out.write(this.subparts.get(i)+"\r\n");
-			out.write("print("+this.selfBiobrick.id+".name)");
+			{
+				if(!this.subparts.get(i).id.equals(this.selfBiobrick.id));
+					out.write(this.subparts.get(i)+"\r\n");
+			}
+			out.write("print("+this.selfBiobrick.name+".ID);");
 			out.close();
 		} catch (IOException e) {
 //			e.printStackTrace();
